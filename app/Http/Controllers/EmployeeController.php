@@ -14,8 +14,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::all()->paginate(10);
-        return view('employee.list_employee');
+        $employees = Employee::paginate(10);
+        return view('employee.list')->with(['employees' => $employees]);
     }
 
     /**
@@ -73,7 +73,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $emp = Employee::find($id);
+        return view('employee.edit', compact('emp','emp'));
     }
 
     /**
@@ -85,7 +86,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'firstname' => 'required',
+            'lastname'  => 'required',
+            'email'     => 'nullable|email'
+        ]);
+        $emp = Employee::find($id);
+        $emp->update($request->all());
+        return redirect('/employee');
     }
 
     /**
@@ -96,6 +104,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Employee::findOrfail($id)->delete();
+        return redirect('/employee');
     }
 }
