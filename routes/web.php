@@ -11,6 +11,19 @@
 |
 */
 
+Route::prefix('employee')->group(function() {
+	Route::get('/', 'EmployeeController@index')->name('employee.list');
+	Route::get('/create', 'EmployeeController@create')->name('employee.create');
+	Route::post('/post', 'EmployeeController@store')->name('employee.store');
+});
+
+
+Route::prefix('company')->group(function() {
+	Route::get('/', 'CompanyController@index')->name('company.list');
+	Route::get('/create', 'CompanyController@create')->name('company.create');
+	Route::post('/post', 'CompanyController@store')->name('company.store');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +35,7 @@ Route::get('/', function () {
 //    return view('layouts.app');
 //})->where('vue', '[\/\w\.-]*');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
