@@ -13,6 +13,7 @@
 						<th>Name</th>
 						<th>Address</th>
 						<th>Website</th>
+						<th colspan="2">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,6 +23,14 @@
 						<td>{{ $comp->name }}</td>
 						<td>{{ $comp->address }}</td>
 						<td>{{ $comp->website }}</td>
+						<td><a href="{{action('CompanyController@edit', $comp->id)}}" class="btn btn-warning">Edit</a></td>
+						<td>
+						<form action="{{action('CompanyController@destroy', $comp->id)}}" method="post">
+						@csrf
+						<input name="_method" type="hidden" value="DELETE">
+						<button class="btn btn-danger" type="submit">Delete</button>
+						</form>
+						</td>
 					</tr>
 				@endforeach
 				</tbody>

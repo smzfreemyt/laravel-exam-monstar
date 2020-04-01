@@ -15,6 +15,7 @@ Route::prefix('employee')->group(function() {
 	Route::get('/', 'EmployeeController@index')->name('employee.list');
 	Route::post('/', 'EmployeeController@store')->name('employee.store');
 	Route::get('/create', 'EmployeeController@create')->name('employee.create');
+	Route::get('/edit/{id}', 'EmployeeController@edit')->name('employee.edit');
 });
 
 
@@ -22,6 +23,8 @@ Route::prefix('company')->group(function() {
 	Route::get('/', 'CompanyController@index')->name('company.list');
 	Route::post('/', 'CompanyController@store')->name('company.store');
 	Route::get('/create', 'CompanyController@create')->name('company.create');
+	Route::get('/edit/{id}', 'CompanyController@edit')->name('company.edit');
+	Route::delete('/{id}', 'CompanyController@destroy')->name('company.destroy');
 });
 
 Route::get('/', function () {
