@@ -4,6 +4,9 @@
 @section('content')
 	<div class="container">
 		<div class="col-md-12">
+			@if($errors->any())
+			    {{ implode('', $errors->all('<div class="alert alert-danger">:message</div>')) }}
+			@endif
 			<div class="card-header">List of employees</div>
 			<div class="card-body">
 				<table class="table">

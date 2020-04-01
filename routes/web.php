@@ -13,8 +13,8 @@
 
 Route::prefix('employee')->group(function() {
 	Route::get('/', 'EmployeeController@index')->name('employee.list');
+	Route::post('/', 'EmployeeController@store')->name('employee.store');
 	Route::get('/create', 'EmployeeController@create')->name('employee.create');
-	Route::post('/post', 'EmployeeController@store')->name('employee.store');
 });
 
 
