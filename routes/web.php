@@ -20,8 +20,8 @@ Route::prefix('employee')->group(function() {
 
 Route::prefix('company')->group(function() {
 	Route::get('/', 'CompanyController@index')->name('company.list');
+	Route::post('/', 'CompanyController@store')->name('company.store');
 	Route::get('/create', 'CompanyController@create')->name('company.create');
-	Route::post('/post', 'CompanyController@store')->name('company.store');
 });
 
 Route::get('/', function () {

@@ -42,7 +42,7 @@ class EmployeeController extends Controller
             'email'     => 'email|nullable',
         ]);
 
-        $emp = Employee::create([
+        Employee::create([
             'firstname' => $request->firstname,
             'lastname'  => $request->lastname,
             'email'     => $request->email,
@@ -59,7 +59,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $emp = Employee::findOrfail($id);
+        $emp = Employee::findOrFail($id);
         return view('employee.item')->with([
             'emp' => $emp->first()
         ]);
@@ -104,7 +104,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        Employee::findOrfail($id)->delete();
+        Employee::findOrFail($id)->delete();
         return redirect('/employee');
     }
 }

@@ -55,10 +55,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('employee.create') }}">
+                                    <a class="dropdown-item" href="{{ route('company.create') }}">
                                         New Company
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('employee.list') }}">
+                                    <a class="dropdown-item" href="{{ route('company.list') }}">
                                         List of Company
                                     </a>
                                 </div>

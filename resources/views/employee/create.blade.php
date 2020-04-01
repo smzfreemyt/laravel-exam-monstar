@@ -3,6 +3,11 @@
 @section('content')
 <div class="container justify-text-center">
 	<div class="col-md-5">
+		@if($errors->any())
+			<div  class="alert alert-danger">
+			    {{ implode('', $errors->all(':message')) }}
+			</div>
+		@endif
 		<h3>Create New</h3><hr>
 		<form action="{{ url('employee')}}" method="POST">
 			@csrf

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Company;
 
 class CompanyController extends Controller
 {
@@ -13,7 +14,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        
+        $company = Company::paginate(10);
+        return view('company.list')->with(['companies' => $company]);
     }
 
     /**
@@ -23,7 +25,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create');
     }
 
     /**
@@ -34,7 +36,16 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address'  => 'required',
+        ]);
+
+        Company::create([
+            'name' => $request->name,
+            'address'  => $request->address,
+        ]);
+        return redirect()->route('company.list');
     }
 
     /**
@@ -45,7 +56,10 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $comp = Company::findOrFail($id);
+        return view('company.item')->with([
+            'comp' => $comp->first()
+        ]);
     }
 
     /**
@@ -56,7 +70,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comp = Company::find($id);
+        return view('employee.edit')->with('comp', $comp);
     }
 
     /**
@@ -68,7 +83,13 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address'  => 'required'
+        ]);
+        $emp = Company::find($id);
+        $emp->update($request->all());
+        return redirect('/company');
     }
 
     /**
@@ -79,6 +100,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Company::findOrFail($id)->delete();
+        return redirect('/company');
     }
 }
